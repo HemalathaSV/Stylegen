@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## StyleGenie app architecture
+
+- Keep fashion-account pages beneath the Cloud-managed `_authenticated` layout; keep sign-in and brand pages public, because route guards need to protect users without making the branded front page private.
+- Route each stored conversation at `/chat/$threadId` and persist its messages with the authenticated owner's `chat_sessions`/`chat_messages` records, so URLs and server access enforce thread isolation.
+- Keep inference, retrieval, and trusted multi-agent workflows in authenticated TanStack `createServerFn` handlers using the Lovable AI Gateway, because credentials and private profile context must never enter browser code.
